@@ -16,8 +16,10 @@ public class SpawnManager : MonoBehaviour
 {
     [Header("Obstacle Spawn Fields")]
     [SerializeField] private GameObject obstaclePrefab;
+    [SerializeField] private GameObject coffeePrefab;
+    [SerializeField] private GameObject decafCoffeePrefab;
 
-    
+
     private Vector3 spawnPos;
     private float startDelay, repeatRate;
 
@@ -33,14 +35,11 @@ public class SpawnManager : MonoBehaviour
         
 
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        InvokeRepeating("SpawnCollectable", startDelay + 1, repeatRate + 1);
 
-        
     }
 
-    private void Update()
-    {
-        SpawnCollectable();
-    }
+    
 
     private void SpawnObstacle()
     {
@@ -57,6 +56,27 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnCollectable()
     {
-        // spaws randomly 
+        int randomCollectable = Random.Range(0, 2); // 0 for regular coffee, 1 for decaf coffee
+        float randomHeight = Random.Range(0.0f, 3.0f); 
+        Vector3 collectableSpawnPos = new Vector3(spawnPos.x, randomHeight, spawnPos.z);
+
+        if (!GameManager.gameOver)
+        {
+            if (randomCollectable == 0)
+            {
+                Instantiate(coffeePrefab, collectableSpawnPos, coffeePrefab.transform.rotation);
+            }
+            else
+            {
+                Instantiate(decafCoffeePrefab, collectableSpawnPos, decafCoffeePrefab.transform.rotation);
+            }
+        }
+        else
+        {
+            CancelInvoke();
+        }
+
+
+
     }
 }
