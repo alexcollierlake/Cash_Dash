@@ -24,7 +24,6 @@ public class MoveLeft : MonoBehaviour
     {
         speed = 15.0f;
         leftBound = -15.0f;
-        
     }
 
     // Update is called once per frame
@@ -40,6 +39,7 @@ public class MoveLeft : MonoBehaviour
 
     }
 
+    //idk wat this does
     private void destroyOutOfScene()
     {
         if(gameObject.transform.position.x < leftBound && gameObject.tag == "Obstacle")
@@ -48,4 +48,29 @@ public class MoveLeft : MonoBehaviour
         }
     }
 
+    //detects if collision with coffee
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coffee"))
+        {
+            // Sends speed of coffee into timer
+            StartCoroutine(timer(25));
+        }
+
+        if (other.gameObject.CompareTag("Decaf"))
+        {
+            // Sends speed of decaf coffee into timer
+            StartCoroutine(timer(5));
+        }
+    }
+
+    //starts timer countdown after collision with any coffee
+    IEnumerator timer(float speed)
+    {
+        this.speed = speed = 25.0f;
+        // do somethinng befroe timer starts
+        yield return new WaitForSeconds(5);
+        // do something after timer is dlne
+        speed = 15.0f;
+    }
 }
