@@ -90,6 +90,28 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.ChangeScore(10);
         }
-       
+
+        if (other.gameObject.CompareTag("Coffee"))
+        {
+            // Sends speed of coffee into timer
+            StartCoroutine(timer(25.0f, other.gameObject));
+        }
+
+        if (other.gameObject.CompareTag("Decaf"))
+        {
+            // Sends speed of decaf coffee into timer
+            StartCoroutine(timer(10, other.gameObject));
+        }
+    }
+
+    //starts timer countdown after collision with any coffee
+    IEnumerator timer(float speed, GameObject coffee)
+    {
+        MoveLeft.speed = speed;
+        Destroy(coffee);
+        // do somethinng befroe timer starts
+        yield return new WaitForSeconds(5);
+        // do something after timer is dlne
+        MoveLeft.speed = 15.0f;
     }
 }

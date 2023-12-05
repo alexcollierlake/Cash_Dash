@@ -4,7 +4,7 @@ using UnityEngine;
 
 /**********
  * 
- * This script is a component of backround and the obstacles,
+ * This script is a component of backround, obstacles, and coffee
  * and moves them left to simulate the player running.
  * 
  * October 30, 2023
@@ -14,7 +14,8 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private float speed, leftBound;
+    public static float speed { private get; set; }
+    private float leftBound;
     
 
     [SerializeField] private Vector3 direction;
@@ -46,31 +47,5 @@ public class MoveLeft : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    //detects if collision with coffee
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Coffee"))
-        {
-            // Sends speed of coffee into timer
-            StartCoroutine(timer(25));
-        }
-
-        if (other.gameObject.CompareTag("Decaf"))
-        {
-            // Sends speed of decaf coffee into timer
-            StartCoroutine(timer(5));
-        }
-    }
-
-    //starts timer countdown after collision with any coffee
-    IEnumerator timer(float speed)
-    {
-        this.speed = speed = 25.0f;
-        // do somethinng befroe timer starts
-        yield return new WaitForSeconds(5);
-        // do something after timer is dlne
-        speed = 15.0f;
     }
 }
