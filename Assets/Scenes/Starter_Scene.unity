@@ -2583,6 +2583,7 @@ MonoBehaviour:
     type: 3}
   decafCoffeePrefab: {fileID: 5973135059779240789, guid: 0fcf418ca262e40f2b5be72ddbab9cd5,
     type: 3}
+  money: {fileID: 3825812239005849701, guid: 7c99a6859d968448b8e049cdc690cd7d, type: 3}
   nothing: 0
 --- !u!4 &1459163016
 Transform:

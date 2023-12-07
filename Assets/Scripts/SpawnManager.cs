@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private GameObject coffeePrefab;
     [SerializeField] private GameObject decafCoffeePrefab;
+    [SerializeField] private GameObject money;
 
 
     private Vector3 spawnPos;
@@ -34,8 +35,9 @@ public class SpawnManager : MonoBehaviour
         repeatRate = 2.0f;
         
 
-        InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
-        InvokeRepeating("SpawnCollectable", startDelay + 1, repeatRate + 1);
+        //InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        InvokeRepeating("SpawnCollectable", startDelay + 1, repeatRate - 1);
+        InvokeRepeating("SpawnMoney", startDelay + 2, repeatRate + 2);
 
     }
 
@@ -66,7 +68,7 @@ public class SpawnManager : MonoBehaviour
             {
                 Instantiate(coffeePrefab, collectableSpawnPos, coffeePrefab.transform.rotation);
             }
-            else
+            else if(randomCollectable == 1)
             {
                 Instantiate(decafCoffeePrefab, collectableSpawnPos, decafCoffeePrefab.transform.rotation);
             }
@@ -78,5 +80,20 @@ public class SpawnManager : MonoBehaviour
 
 
 
+    }
+
+    private void SpawnMoney()
+    {
+        float randomHeight = Random.Range(0.0f, 3.0f);
+        Vector3 collectableSpawnPos = new Vector3(spawnPos.x, randomHeight, spawnPos.z);
+
+        if (!GameManager.gameOver)
+        {
+            Instantiate(money, collectableSpawnPos, money.transform.rotation);
+        }
+        else
+        {
+            CancelInvoke();
+        }
     }
 }
