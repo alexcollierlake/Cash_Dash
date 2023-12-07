@@ -42,7 +42,17 @@ public class MoveLeft : MonoBehaviour
 
     private void destroyOutOfScene()
     {
-        if(gameObject.transform.position.x < leftBound && gameObject.tag == "Obstacle")
+        if(gameObject.transform.position.x < leftBound && gameObject.tag == "Obstacle" )
+        {
+            Destroy(gameObject);
+        }
+
+        if(gameObject.transform.position.x < leftBound && gameObject.tag == "Decaf")
+        {
+            Destroy(gameObject);
+        }
+
+        if (gameObject.transform.position.x < leftBound && gameObject.tag == "Coffee")
         {
             Destroy(gameObject);
         }

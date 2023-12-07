@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.ChangeScore(10);
         }
+        
        
     }
 }
