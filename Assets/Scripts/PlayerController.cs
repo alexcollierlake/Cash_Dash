@@ -22,12 +22,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem explosionParticle, dirtParticle;
     [SerializeField] private AudioClip jumpSound, crashSound;
     [SerializeField] private TextMeshProUGUI gameOver;
+    [SerializeField] private AudioClip coffee, decaf;
 
     private Animator playerAnimator;
     private AudioSource playerAudio;
     private Rigidbody playerRb;
     private bool isOnGround;
     private AudioSource gameAudio;
+    public static float playerSpeed { get; private set; }
+
+    private void Awake()
+    {
+        playerSpeed = 15;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +44,8 @@ public class PlayerController : MonoBehaviour
         Physics.gravity *= gravityModifier;
         playerAnimator = GetComponent<Animator>();
         gameAudio = GetComponent<AudioSource>();
+
+        
 
     }
 
@@ -90,7 +99,31 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.ChangeScore(10);
         }
-        
-       
+
+        if (other.gameObject.CompareTag("Coffee"))
+        {
+            StartCoroutine(timer(20.0f, other.gameObject));
+            gameAudio.PlayOneShot(coffee, 1.0f);
+        }
+
+        if (other.gameObject.CompareTag("Decaf"))
+        {
+            Debug.Log("is this working?");
+            StartCoroutine(timer(10.0f, other.gameObject));
+            gameAudio.PlayOneShot(decaf, 1.0f);
+        }
+    }
+
+    //starts timer on colision
+    IEnumerator timer(float speed, GameObject coffee)
+    {
+
+        Debug.Log("is this working?");
+        playerSpeed = speed;
+        Destroy(coffee);
+        //do stuff before timer starts
+        yield return new WaitForSeconds(5);
+        //do stuff after timer ends
+        playerSpeed = 15.0f;
     }
 }

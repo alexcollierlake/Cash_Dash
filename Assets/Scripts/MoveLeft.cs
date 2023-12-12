@@ -14,7 +14,8 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private float speed, leftBound;
+    private float leftBound;
+    private float speed;
     
 
     [SerializeField] private Vector3 direction;
@@ -22,7 +23,7 @@ public class MoveLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = 15.0f;
+        speed = PlayerController.playerSpeed;
         leftBound = -15.0f;
         
     }
@@ -30,6 +31,7 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed = PlayerController.playerSpeed;
 
         if (!GameManager.gameOver)
         {
