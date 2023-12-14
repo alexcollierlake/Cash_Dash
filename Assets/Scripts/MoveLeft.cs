@@ -58,6 +58,11 @@ public class MoveLeft : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (gameObject.transform.position.x < leftBound && gameObject.tag == "Scoreable")
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

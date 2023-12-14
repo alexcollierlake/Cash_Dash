@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject toggleGroup, startButton, spawnManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private ParticleSystem dirtSplatter;
-    [SerializeField] private AudioClip winAudio;
+    //[SerializeField] private AudioClip winAudio;
 
     public static bool gameOver = true;
     private static float score;
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             
             gameOver = true;
             audioSource.Stop();
-            audioSource.PlayOneShot(winAudio, 1.0f);
+            //audioSource.PlayOneShot(winAudio, 1.0f);
             playerAnimator.SetBool("BeginGame_b", false);
             playerAnimator.SetFloat("Speed_f", 0);
             

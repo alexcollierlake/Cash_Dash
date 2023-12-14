@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
         
 
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
-        InvokeRepeating("SpawnCollectable", startDelay + 1, repeatRate + 5);
+        InvokeRepeating("SpawnCollectable", startDelay + 1, repeatRate + 2.75f);
         InvokeRepeating("SpawnMoney", startDelay + 2.5f, repeatRate + 2.5f);
 
     }
@@ -84,7 +84,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnMoney()
     {
-        float randomHeight = Random.Range(1.0f, 5.0f);
+        float randomHeight = Random.Range(1.0f, 6.0f);
         Vector3 collectableSpawnPos = new Vector3(spawnPos.x, randomHeight, spawnPos.z);
 
         if (!GameManager.gameOver)
