@@ -87,40 +87,42 @@ public class PlayerController : MonoBehaviour
             dirtParticle.Stop();
             gameOver.gameObject.SetActive(true);
             
-
         }
 
-      
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Scoreable")
+        Debug.Log(other.gameObject.name);
+        switch(other.tag)
         {
-            GameManager.ChangeScore(10);
-        }
+            case "Scoreable": 
+                GameManager.ChangeScore(10);
+                if (other.gameObject != null)
+                {
+                    other.gameObject.GetComponent<CashController>().pocketed = true;
+                }
+                break;
 
-        if (other.gameObject.CompareTag("Coffee"))
-        {
-            StartCoroutine(timer(20.0f, other.gameObject));
-            gameAudio.PlayOneShot(coffee, 1.0f);
-        }
+            case "Coffee":
+                Destroy(other.gameObject);
+                StartCoroutine(timer(20.0f));
+                gameAudio.PlayOneShot(coffee, 1.0f);
+                break;
 
-        if (other.gameObject.CompareTag("Decaf"))
-        {
-            Debug.Log("is this working?");
-            StartCoroutine(timer(10.0f, other.gameObject));
-            gameAudio.PlayOneShot(decaf, 1.0f);
+            case "Decaf":
+                Destroy(other.gameObject);
+                StartCoroutine(timer(10.0f));
+                gameAudio.PlayOneShot(decaf, 1.0f);
+                break;
         }
     }
 
     //starts timer on colision
-    IEnumerator timer(float speed, GameObject coffee)
+    IEnumerator timer(float speed)
     {
-
         Debug.Log("is this working?");
         playerSpeed = speed;
-        Destroy(coffee);
         //do stuff before timer starts
         yield return new WaitForSeconds(5);
         //do stuff after timer ends
