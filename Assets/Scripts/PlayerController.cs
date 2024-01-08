@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         switch(other.tag)
         {
             case "Scoreable": 
-                GameManager.ChangeScore(10);
+                GameManager.ChangeScore(100);
                 if (other.gameObject != null)
                 {
                     other.gameObject.GetComponent<CashController>().pocketed = true;

@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private void DisplayUI()
     {
-        scoreboardText.text = "Score: " + Mathf.RoundToInt(score).ToString();
+        scoreboardText.text = "Wallet: $" + Mathf.RoundToInt(score).ToString();
         if(timedGame)
         {
             if(timeRemaining > 0)
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void SetTimed(bool timed)
     {
-        Debug.Log("Is game over?");
+        
         timedGame = timed;
     }
 
